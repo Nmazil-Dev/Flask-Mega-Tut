@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% if current_user.is_anonymous %}
+    <h1>Welcome!</h1>
+    <h2>Please <a href="{{url_for('login')}}">Login</a> or <a href="{{url_for('register')}}">Register</a></h2>
+    {% else %}
     <h1>Hi, {{ current_user.username }}!</h1>
+    {% endif %}
     {% for post in posts %}
     <div><p>{{post.author.username}} says: <b>{{post.body}}</b></p></div>
     {% endfor %}
